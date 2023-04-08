@@ -1,0 +1,110 @@
+<app-loading
+  [errorMSG]="errorMSG"
+  [countNb]="countNb"
+  [count]="count"
+></app-loading>
+<div class="mx-auto" style="max-width: 500px" *ngIf="count === countNb">
+  <form
+    class="text-bg-dark pt-3 px-3 rounded-4 d-flex flex-column border border-dark border-3 mx-auto"
+    autocomplete="off"
+    #loginForm="ngForm"
+    (ngSubmit)="onSubmit(loginForm)"
+    novalidate
+  >
+    <h1 class="py-3 text-center">Add Customer</h1>
+    <div class="mb-3">
+      <label class="text-light">First Name :</label>
+      <input
+        #FirstNameInput="ngModel"
+        [class.is-invalid]="FirstNameInput.invalid && FirstNameInput.touched"
+        type="text"
+        class="form-control text-bg-dark"
+        name="FirstName"
+        [(ngModel)]="customer.first"
+        placeholder="First Name"
+        required
+        minlength="4"
+      />
+      <div
+        *ngIf="FirstNameInput.invalid && FirstNameInput.touched"
+        class="text-danger"
+      >
+        <small *ngIf="FirstNameInput.errors?.['required']"
+          >First Name is required</small
+        >
+        <small *ngIf="FirstNameInput.errors?.['minlength']"
+          >First Name is too short</small
+        >
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="text-light">last Name :</label>
+      <input
+        #lastNameInput="ngModel"
+        [class.is-invalid]="lastNameInput.invalid && lastNameInput.touched"
+        type="text"
+        class="form-control text-bg-dark"
+        name="last Name"
+        [(ngModel)]="customer.last"
+        placeholder="Last Name"
+        required
+      />
+      <small
+        class="text-danger"
+        *ngIf="lastNameInput.invalid && lastNameInput.touched"
+        >last Name is required</small
+      >
+    </div>
+
+    <div class="mb-3">
+      <select
+        required
+        #Country="ngModel"
+        [class.is-invalid]="Country.invalid && Country.touched"
+        class="form-select form-select-lg text-bg-secondary"
+        name="Country"
+        [(ngModel)]="customer.country_id"
+      >
+        <option value="">Select a Country</option>
+        <option *ngFor="let c of countries" [value]="c.id">
+          {{ c.country_name }}
+        </option>
+      </select>
+      <small
+        class="text-danger"
+        [class.d-none]="Country.valid || Country.untouched"
+        >please select a Country</small
+      >
+    </div>
+
+    <div class="mb-3">
+      <select
+        required
+        #BloodType="ngModel"
+        [class.is-invalid]="BloodType.invalid && BloodType.touched"
+        class="form-select form-select-lg text-bg-secondary"
+        name="BloodType"
+        [(ngModel)]="customer.blood_type_id"
+      >
+        <option value="">Select a Blood Type</option>
+        <option *ngFor="let t of bloodTypes" [value]="t.id">
+          {{ t.blood_type }}
+        </option>
+      </select>
+      <small
+        class="text-danger"
+        [class.d-none]="BloodType.valid || BloodType.untouched"
+        >please select a BloodType</small
+      >
+    </div>
+
+    <button
+      class="btn btn-secondary mb-3"
+      [disabled]="loginForm.form.invalid || loading === true"
+    >
+      Add
+    </button>
+    <div class="text-danger text-center">{{ errorMSG }}</div>
+  </form>
+</div>

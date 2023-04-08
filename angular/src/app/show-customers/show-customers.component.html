@@ -1,0 +1,40 @@
+<app-loading
+  [errorMSG]="errorMSG"
+  [countNb]="countNb"
+  [count]="count"
+></app-loading>
+
+<div class="mx-auto" style="max-width: 800px" *ngIf="count === countNb">
+  <table class="table table-striped table-primary">
+    <thead>
+      <tr>
+        <th class="text-center">Id</th>
+        <th class="text-center">First</th>
+        <th class="text-center">Last</th>
+        <th class="text-center">blood type</th>
+        <th class="text-center">country</th>
+        <th class="text-center"><i class="fas fa-edit"></i></th>
+        <th class="text-center"><i class="fas fa-trash"></i></th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let customer of customers">
+        <th class="text-center">{{ customer.id }}</th>
+        <td class="text-center">{{ customer.first }}</td>
+        <td class="text-center">{{ customer.last }}</td>
+        <td class="text-center">{{ customer.blood_type }}</td>
+        <td class="text-center">{{ customer.country_name }}</td>
+        <td class="text-center">
+          <button class="btn" (click)="edit(customer)">
+            <i class="fas fa-edit"></i>
+          </button>
+        </td>
+        <td class="text-center">
+          <button class="btn" (click)="deleteCustomer(customer.id!)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

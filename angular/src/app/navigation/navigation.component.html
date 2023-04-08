@@ -1,0 +1,35 @@
+<div>
+  <header class="text-primary bg-dark text-primary mb-2">
+    <nav class="text-primary navbar navbar-dark bg-dark">
+      <div class="text-primary container" style="max-width: 800px">
+        <a class="text-primary navbar-brand">DB</a>
+        <div
+          class="d-flex justify-content-left align-items-center"
+          style="width: 90%"
+        >
+          <div class="nav-item me-3 text-light">
+            <a
+              class="nav-link"
+              routerLink="/show-customers"
+              routerLinkActive="text-primary"
+            >
+              Show Customers
+            </a>
+          </div>
+
+          <div class="nav-item text-light">
+            <a
+              class="nav-link"
+              routerLink="/add-customer"
+              routerLinkActive="text-primary"
+            >
+              Add Customer
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+</div>
+
+<router-outlet></router-outlet>
